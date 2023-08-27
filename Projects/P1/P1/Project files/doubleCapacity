@@ -1,0 +1,40 @@
+public void doubleCapacity{
+	max *= 2;
+		int i;
+		Object[] temp = new Object[max];
+
+		//copying from beginning to new array
+		for(i = 0; i < max/2; i++){
+			if(line[i] == null){
+				//assign end to last element
+				this.end = i - 1;
+
+				//if end is not part of beginning half
+				if(this.end < 0){
+					//end must be last element (list is full bc we called doubleCapacity)
+					this.end = max - 1;
+				}
+				break;
+			}
+			temp[i] = line[i];
+		}
+
+		//copying from the end to new array (for line wrap around)
+		for(i = 0; i < max/2; i++){
+			if(line[(max/2) - i -1] == null){
+				//assign start to lowest element of latter half of array
+				this.start = max - i;
+
+				//if start is not part of latter half
+				/*if(this.start > (max/2)){
+					//start must be 0 (list is full bc we called doubleCapacity)
+					this.start = 0;
+				}*/
+				break;
+			}
+			temp[max-i-1] = line[(max/2)-i-1];
+		}
+		this.line = temp;
+		this.space = (this.space * 2) + 1;
+	}
+}
